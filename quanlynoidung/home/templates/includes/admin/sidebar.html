@@ -1,0 +1,101 @@
+{% load static %}
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+  <ul class="sidebar-nav" id="sidebar-nav">
+    <li class="nav-item">
+      <a class="nav-link " href="http://127.0.0.1:8000/admin_dashboard">
+        <i class="bi bi-grid"></i>
+        <span>Trang chủ</span>
+      </a>
+    </li>
+    <!-- End Dashboard Nav -->
+    {% if ctx.can_manage_user_permission %}
+      <li class="nav-item">
+        <a class="nav-link collapsed"
+           data-bs-target="#components-nav"
+           data-bs-toggle="collapse"
+           href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Tài khoản</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav"
+            class="nav-content collapse "
+            data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="employees">
+              <i class="bi bi-circle"></i><span>Nhân viên</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    {% endif %}
+    <!-- End Components Nav -->
+    {% if ctx.can_manage_room_permission %}
+      <li class="nav-item">
+        <a class="nav-link collapsed"
+           data-bs-target="#forms-nav"
+           data-bs-toggle="collapse"
+           href="#">
+          <i class="bi bi-journal-text"></i><span>Phòng</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav"
+            class="nav-content collapse "
+            data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="rooms">
+              <i class="bi bi-circle"></i><span>Danh sách</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    {% endif %}
+    <!-- End Forms Nav -->
+    {% if ctx.can_manage_service_permission %}
+      <li class="nav-item">
+        <a class="nav-link collapsed"
+           data-bs-target="#tables-nav"
+           data-bs-toggle="collapse"
+           href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Dịch vụ</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tables-nav"
+            class="nav-content collapse"
+            data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="services">
+              <i class="bi bi-circle"></i><span>Danh sách</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    {% endif %}
+    <!-- End Tables Nav -->
+    <li class="nav-item">
+      <a class="nav-link collapsed"
+         data-bs-target="#charts-nav"
+         data-bs-toggle="collapse"
+         href="#">
+        <i class="bi bi-bar-chart"></i><span>Sự kiện</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="charts-nav"
+          class="nav-content collapse "
+          data-bs-parent="#sidebar-nav">
+        {% if ctx.can_manage_blog_permission %}
+          <li>
+            <a href="posts">
+              <i class="bi bi-circle"></i><span>Bài viết</span>
+            </a>
+          </li>
+        {% endif %}
+        {% if ctx.can_manage_voucher_permission %}
+          <li>
+            <a href="gifts">
+              <i class="bi bi-circle"></i><span>Ưu đãi</span>
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </li>
+    <!-- End Charts Nav -->
+  </ul>
+</aside>
+<!-- End Sidebar-->

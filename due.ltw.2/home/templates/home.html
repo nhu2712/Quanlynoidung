@@ -1,0 +1,328 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Khách sạn Hoàng Hôn</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700|Work+Sans:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css'  %}">
+
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
+
+  </head>
+  <body>
+
+  <div class="site-wrap">
+
+    {% include 'includes/header.html' %}
+
+
+    <div class="slide-one-item home-slider owl-carousel">
+
+      <div class="site-blocks-cover overlay" style="background-image: url('{% static 'images/hero_1.jpg' %}');" data-aos="fade" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-md-7 text-center" data-aos="fade">
+
+              <h1 class="mb-2">Welcome To Suites</h1>
+              <h2 class="caption">Hotel &amp; Resort</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="site-section">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6 mb-5 mb-md-0">
+              <div class="img-border">
+                  <img src="{% static 'images/thongtintrangchu.jpg' %}" alt="" class="img-fluid">
+              </div>
+          </div>
+          <div class="col-md-5 ml-auto">
+            <div class="section-heading text-left">
+              <h2 class="mb-5">Giới thiệu</h2>
+            </div>
+            <p class="mb-4">Chào mừng bạn đến với Khách sạn Hoàng Hôn – nơi giao thoa giữa vẻ đẹp hiện đại và nét cổ kính đặc trưng. Tọa lạc tại vị trí đắc địa, khách sạn chúng tôi mang đến không gian nghỉ dưỡng sang trọng và yên bình, phù hợp cho cả những chuyến công tác lẫn kỳ nghỉ dưỡng. Hãy đặt phòng ngay hôm nay để tận hưởng ưu đãi đặc biệt và trải nghiệm dịch vụ đẳng cấp.
+              Khách sạn Hoàng Hôn - nơi mỗi khoảnh khắc trở thành kỷ niệm đáng nhớ!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 mx-auto text-center mb-5 section-heading">
+            <h2 class="mb-5">TÍNH NĂNG </h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="text-center p-4 item">
+              <span class="flaticon-pool display-3 mb-3 d-block text-primary"></span>
+              <h2 class="h5">Hồ bơi</h2>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="text-center p-4 item">
+              <span class="flaticon-desk display-3 mb-3 d-block text-primary"></span>
+              <h2 class="h5">Gọi thức ăn nhanh</h2>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="text-center p-4 item">
+              <span class="flaticon-exit display-3 mb-3 d-block text-primary"></span>
+              <h2 class="h5">Thoát hiểm an toàn</h2>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="text-center p-4 item">
+              <span class="flaticon-parking display-3 mb-3 d-block text-primary"></span>
+              <h2 class="h5">Bãi đỗ xe</h2>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="text-center p-4 item">
+              <span class="flaticon-hair-dryer display-3 mb-3 d-block text-primary"></span>
+              <h2 class="h5">Tạo mẫu tóc</h2>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="text-center p-4 item">
+              <span class="flaticon-minibar display-3 mb-3 d-block text-primary"></span>
+              <h2 class="h5">Quầy bar</h2>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="text-center p-4 item">
+              <span class="flaticon-drink display-3 mb-3 d-block text-primary"></span>
+              <h2 class="h5">Thức uống</h2>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="text-center p-4 item">
+              <span class="flaticon-cab display-3 mb-3 d-block text-primary"></span>
+              <h2 class="h5">Thuê ô tô</h2>
+            </div>
+          </div>
+
+
+
+
+
+
+
+        </div>
+      </div>
+    </div>
+    <div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 mx-auto text-center mb-5 section-heading">
+            <h2 class="mb-5">Xem nhanh</h2>
+          </div>
+        </div>
+        <div class="row no-gutters">
+          <div class="col-md-6 col-lg-3">
+            <a href="{% static 'images/Suite3.jpg' %}" class="image-popup ">
+                <img src="{% static 'images/Suite3.jpg' %}" alt="Image" class="img-fluid">
+            </a>
+            </div>
+          <div class="col-md-6 col-lg-3">
+            <a href="{% static 'images/Suite2.jpg' %}" class="image-popup "><img src="{% static 'images/Suite2.jpg' %}" alt="Image" class="img-fluid"></a>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <a href="{% static 'images/Deluxe3.jpg' %}" class="image-popup"><img src="{% static 'images/Deluxe3.jpg' %}" alt="Image" class="img-fluid"></a>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <a href="{% static 'images/Standard2.jpg' %}" class="image-popup "><img src="{% static 'images/Standard2.jpg' %}" alt="Image" class="img-fluid"></a>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <a href="{% static 'images/Deluxe1.jpg' %}" class="image-popup"><img src="{% static 'images/Deluxe1.jpg' %}" alt="Image" class="img-fluid"></a>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <a href="{% static 'images/Suite1.jpg' %}" class="image-popup"><img src="{% static 'images/Suite1.jpg' %}" alt="Image" class="img-fluid"></a>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <a href="{% static 'images/Deluxe-2.jpg' %}" class="image-popup "><img src="{% static 'images/Deluxe-2.jpg' %}" alt="Image" class="img-fluid"></a>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <a href="{% static 'images/Standard4.jpg' %}" class="image-popup "><img src="{% static 'images/Standard4.jpg' %}" alt="Image" class="img-fluid"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="site-section block-15">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 mx-auto text-center mb-5 section-heading">
+            <h2>Thông tin phòng</h2>
+          </div>
+        </div>
+        <div class="nonloop-block-15 owl-carousel">
+            <div class="media-with-text p-md-4">
+              <div class="img-border-sm mb-4">
+
+                  <img src="{% static 'images/standard2.jpg' %}" alt="" class="img-fluid">
+
+              </div>
+                            <h2 class="heading mb-0"><a >Phòng 101</a></h2>
+              <br>
+              <p>Phòng Tiêu Chuẩn của chúng tôi mang đến không gian ấm cúng, tiện nghi với đầy đủ trang thiết bị cơ bản. Phù hợp cho những khách hàng tìm kiếm sự thoải mái và tiết kiệm, phòng tiêu chuẩn có giường đôi hoặc 2 giường đơn, tầm nhìn thành phố và thiết kế tinh tế để đảm bảo sự thư giãn tối đa.</p>
+            </div>
+
+            <div class="media-with-text p-md-4">
+              <div class="img-border-sm mb-4">
+
+                  <img src="{% static 'images/Suite1.jpg' %}" alt="" class="img-fluid">
+
+              </div>
+                            <h2 class="heading mb-0"><a >Phòng 201</a></h2>
+              <br>
+              <p>Nâng tầm trải nghiệm với Phòng Thượng Hạng, được thiết kế rộng rãi và trang nhã, kết hợp giữa sự hiện đại và nét cổ điển. Với tầm nhìn ra biển hoặc khu vườn xanh mát, phòng Thượng Hạng mang lại sự thoải mái tuyệt đối, đi kèm với các tiện ích cao cấp như giường cỡ lớn, minibar, và phòng tắm sang trọng.</p>
+            </div>
+
+            <div class="media-with-text p-md-4">
+              <div class="img-border-sm mb-4">
+
+                  <img src="{% static 'images/Deluxe3.jpg' %}" alt="" class="img-fluid">
+
+              </div>
+                            <h2 class="heading mb-0"><a >Phòng 301</a></h2>
+              <br>
+              <p>Đối với những ai yêu cầu sự sang trọng và riêng tư, Phòng Sang Trọng chính là lựa chọn hoàn hảo. Phòng Sang Trọng bao gồm không gian phòng khách và phòng ngủ riêng biệt, nội thất tinh xảo và tầm nhìn ngoạn mục. Khách lưu trú còn được hưởng các dịch vụ đặc quyền như bữa sáng tại phòng, khu vực làm việc riêng, và bồn tắm thư giãn.</p>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="site-section bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 mx-auto text-center mb-5 section-heading">
+            <h2 class="mb-5">Đánh giá của khách hàng</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-4 mb-5">
+            <div class="text-center">
+              <a class="d-block mb-4 thumbnail"><img src="{% static 'images/hieu.jpg' %}" alt="Image" class="img-fluid"></a>
+              <div class="p-4">
+                <h3 class="heading mb-3"><a > Anh Hiếu</a></h3>
+                <p>Phòng rất rộng rãi, sạch sẽ và thoải mái. Giường êm ái, view biển tuyệt đẹp, đặc biệt là vào lúc hoàng hôn.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-5">
+            <div class="text-center">
+              <a class="d-block mb-4 thumbnail"><img src="{% static 'images/person_2.jpg' %}" alt="Image" class="img-fluid"></a>
+              <div class="p-4">
+              <h3 class="heading mb-3"><a >Chị Hiền</a></h3>
+              <p>Nhân viên cực kỳ thân thiện và chu đáo. Họ luôn sẵn sàng giúp đỡ và đáp ứng yêu cầu của chúng tôi một cách nhanh chóng.</p>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-5">
+            <div class="text-center">
+              <a  class="d-block mb-4 thumbnail"><img src="{% static 'images/person_3.jpg' %}" alt="Image" class="img-fluid"></a>
+              <div class="p-4">
+              <h3 class="heading mb-3"><a > Anh Nam</a></h3>
+                <p>Khách sạn nằm ngay trung tâm, rất thuận tiện để đi bộ đến các địa điểm tham quan và nhà hàng.</p>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 mb-5">
+            <div class="text-center">
+              <a  class="d-block mb-4 thumbnail"><img src="{% static 'images/person_4.jpg' %}" alt="Image" class="img-fluid"></a>
+              <div class="p-4">
+              <h3 class="heading mb-3"><a >Chị Vy</a></h3>
+                <p>Khách sạn đã chuẩn bị một món quà đặc biệt cho chúng tôi vì là kỷ niệm ngày cưới. Thật sự rất cảm động và khiến kỳ nghỉ của chúng tôi trở nên đáng nhớ.</p>
+
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-5">
+            <div class="text-center">
+              <a  class="d-block mb-4 thumbnail"><img src="{% static 'images/duong.jpg' %}" alt="Image" class="img-fluid"></a>
+              <div class="p-4">
+              <h3 class="heading mb-3"><a>Anh Dương </a></h3>
+                <p>Mặc dù khách sạn có phong cách hiện đại, nhưng tôi rất thích cảm giác ấm cúng và thân thiện mà nó mang lại. Từ sảnh đến các phòng đều rất dễ chịu.</p>
+
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-5">
+            <div class="text-center">
+              <a  class="d-block mb-4 thumbnail"><img src="{% static 'images/tam.jpg' %}" alt="Image" class="img-fluid"></a>
+              <div class="p-4">
+              <h3 class="heading mb-3"><a>Chị Tâm</a></h3>
+                <p>Nhà hàng khách sạn rất tuyệt vời! Thực đơn đa dạng và món ăn đều rất ngon, đặc biệt là món hải sản.</p>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="py-5 quick-contact-info">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 text-center">
+            <div>
+              <span class="icon-room text-white h2 d-block"></span>
+              <h2>Địa chỉ</h2>
+              <p class="mb-0">Đà Nẵng <br>  Việt Nam</p>
+            </div>
+          </div>
+          <div class="col-md-4 text-center">
+            <div>
+              <span class="icon-clock-o text-white h2 d-block"></span>
+              <h2>Thời gian phục vụ</h2>
+              <p class="mb-0">Thứ 7 - Chủ nhật at 6:30AM - 11PM <br>
+              Thứ 2 - Thứ 6 6:30AM - 10:30PM <br>
+            </div>
+          </div>
+          <div class="col-md-4 text-center">
+            <div>
+              <span class="icon-comments text-white h2 d-block"></span>
+              <h2>Liên hệ</h2>
+              <p class="mb-0">Email: hoanghon@hotel.com <br>
+              Di động: (84) 934-510-111 </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    {% include 'includes/footer.html' %}
+  </body>
+</html>

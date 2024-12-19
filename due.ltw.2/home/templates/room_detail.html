@@ -1,0 +1,280 @@
+{% load static %}
+
+<html
+  lang="vi-VN"
+  id="internal_page"
+  class="page-template page-template-template-rooms page-template-template-rooms-php page page-id-33 page-parent internal_page lang_vi"
+>
+  <!--<![endif]-->
+  <head>
+    <meta charset="UTF-8" />
+    <title>Khách sạn Hoàng Hôn</title>
+
+    <style id="global-styles-inline-css" type="text/css">
+      .site-navbar-wrap {
+        z-index: 9000 !important;
+      }
+        html {
+          margin-top: 0px !important;
+        }
+        * html body {
+          margin-top: 0px !important;
+        }
+        body {
+          background-color: #eee;
+        }
+
+        .bdge {
+          height: 21px;
+          background-color: orange;
+          color: #fff;
+          font-size: 11px;
+          padding: 8px;
+          border-radius: 4px;
+          line-height: 3px;
+        }
+
+        .comments {
+          text-decoration: underline;
+          text-underline-position: under;
+          cursor: pointer;
+        }
+
+        .dot {
+          height: 7px;
+          width: 7px;
+          margin-top: 3px;
+          background-color: #bbb;
+          border-radius: 50%;
+          display: inline-block;
+        }
+
+        .hit-voting:hover {
+          color: blue;
+        }
+
+        .hit-voting {
+          cursor: pointer;
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'css/owl.theme.default.min.css' %}"
+    />
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+    <link
+      rel="stylesheet"
+      id="libraries-css"
+      href="https://hanoihotel.com.vn/wp-content/themes/pro-theme-munich/css/libraries.min.css?ver=0.3"
+      type="text/css"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="fontawesome-css"
+      href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css?ver=0.3"
+      type="text/css"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="main-css"
+      href="https://hanoihotel.com.vn/wp-content/themes/pro-theme-munich/css/main.min.css?ver=0.3"
+      type="text/css"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="jquery-ui-css-css"
+      href="https://hanoihotel.com.vn/wp-content/themes/pro-theme-munich/css/jquery-ui.min.css?ver=0.3"
+      type="text/css"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="child_color_css-css"
+      href="https://hanoihotel.com.vn/wp-content/themes/hanoi-hotel/css/colors.css?ver=0.3"
+      type="text/css"
+      media="all"
+    />
+    <script
+      type="text/javascript"
+      src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"
+      id="jquery-js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://hanoihotel.com.vn/wp-includes/js/jquery/ui/core.min.js?ver=1.13.2"
+      id="jquery-ui-core-js"
+    ></script>
+
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css'  %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
+
+  </head>
+  <body
+    class="page-template page-template-template-rooms page-template-template-rooms-php page page-id-33 page-parent rooms default"
+  >
+    {% include 'includes/header.html' %}
+
+
+    <div class="slide-one-item home-slider owl-carousel">
+
+      <div
+        class="site-blocks-cover overlay"
+        style="background-image: url('{% static 'images/hero_1.jpg' %}')"
+        data-aos="fade"
+        data-stellar-background-ratio="0.5"
+      >
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-md-7 text-center" data-aos="fade">
+              <span class="caption mb-3">Mời bạn đọc</span>
+              <h1 class="mb-4">Thông Tin Phòng {{ room.room_number }}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  <!-- Submenu pages -->
+
+
+    <main id="page">
+      <!-- CONTENT index-->
+      <div class="site-section">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-md-6 mb-5 mb-md-0">
+                  <div class="img-border">
+                        {% if room.image %}
+                            <img src="{{ room.image.url }}" alt="Image of {{ room.room_type }}" class="img-fluid">
+                        {% else %}
+                            <img src="{% static 'images/default_room.jpg' %}" alt="Default Room Image" class="img-fluid">
+                        {% endif %}
+                  </div>
+              </div>
+              <div class="col-md-5 ml-auto">
+                <div class="room-price accent-color" style="font-weight: bold; color: #000;">
+                    <span class="regular-price" style="font-weight: bold; color: #000;">{{ room.price_per_night }}VND Một Đêm</span>
+                </div>
+                <h1 class="the_title">{{ room.room_type }} - {{ room.room_number }}</h1>
+                <p class="mb-5">{{room.description}}</p>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="container mt-5 mb-5">
+        <div class="d-flex justify-content-center row">
+            <div class="d-flex flex-column col-md-8">
+                <div class="coment-bottom bg-white p-2 px-4">
+                    {% if user.is_authenticated %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-flex flex-row add-comment-section mt-4 mb-4">
+                            <img
+                                class="img-fluid img-responsive rounded-circle mr-2"
+                                src="https://i.imgur.com/qdiP4DB.jpg"
+                                width="38"
+                            />
+                            <input
+                                type="text"
+                                name="content"
+                                class="form-control mr-3"
+                                placeholder="Thêm bình luận"
+                                required
+                            />
+                            <button class="btn btn-primary" type="submit">Bình luận</button>
+                        </div>
+                    </form>
+                    {% else %}
+                    <div class="alert alert-warning mt-4">
+                        Bạn phải <a href="{% url 'login' %}">đăng nhập</a> để có thể bình luận.
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Display Comments -->
+                {% for comment in comments %}
+                <div class="commented-section mt-2">
+                    <div class="d-flex flex-row align-items-center commented-user">
+                        <h5 class="mr-2">{{ comment.author.username }}</h5>
+                        <span class="dot mb-1"></span>
+                        <span class="mb-1 ml-2">{{ comment.created_at|date:"F j, Y, g:i a" }}</span>
+                    </div>
+                    <div class="comment-text-sm">
+                        <span>{{ comment.content }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    </main>
+
+    <div class="system">
+      <script
+        type="text/javascript"
+        src="//cdn.jsdelivr.net/npm/intersection-observer@0.10.0/intersection-observer.min.js?ver=0.3#loaddefer"
+        id="intersection-observer-js"
+      ></script>
+      <script
+        type="text/javascript"
+        src="//cdn.jsdelivr.net/npm/vanilla-lazyload@15.2.0/dist/lazyload.min.js?ver=0.3#loaddefer"
+        id="lazyload-js"
+      ></script>
+      <script
+        type="text/javascript"
+        src="https://hanoihotel.com.vn/wp-content/themes/pro-theme-munich/js/main.js?ver=1.0#loaddefer"
+        id="main_js-js"
+      ></script>
+      <script type="text/javascript">
+        WebFontConfig = {
+          google: {
+            families: [
+              "Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i:cyrillic,cyrillic-ext,latin-ext",
+              "Lora:400,400i,700,700i:cyrillic,cyrillic-ext,latin-ext",
+              // 'Great Vibes:400'
+            ],
+          },
+          custom: {
+            families: ["FontAwesome"],
+            urls: [
+              "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css",
+            ],
+          },
+        };
+        (function () {
+          var wf = document.createElement("script");
+          wf.src =
+            ("https:" === document.location.protocol ? "https" : "http") +
+            "://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js";
+          wf.type = "text/javascript";
+          wf.async = "true";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(wf, s);
+        })();
+      </script>
+    </div>
+  </body>
+  {% include 'includes/footer.html' %}
+</html>

@@ -1,0 +1,316 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>Ưu đãi</title>
+        <meta content="" name="description" />
+        <meta content="" name="keywords" />
+        <!-- Favicons -->
+        <link href="{% static 'assets/img/favicon.png' %}" rel="icon" />
+        <link href="{% static 'assets/img/apple-touch-icon.png' %}"
+              rel="apple-touch-icon" />
+        <!-- Google Fonts -->
+        <link href="https://fonts.gstatic.com" rel="preconnect" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+              rel="stylesheet" />
+        <!-- Vendor CSS Files -->
+        <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}"
+              rel="stylesheet" />
+        <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}"
+              rel="stylesheet" />
+        <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}"
+              rel="stylesheet" />
+        <link href="{% static 'assets/vendor/quill/quill.snow.css' %}"
+              rel="stylesheet" />
+        <link href="{% static 'assets/vendor/quill/quill.bubble.css' %}"
+              rel="stylesheet" />
+        <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}"
+              rel="stylesheet" />
+        <link href="{% static 'assets/vendor/simple-datatables/style.css' %}"
+              rel="stylesheet" />
+        <!-- Template Main CSS File -->
+        <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+    </head>
+    <body>
+        {% include 'includes/admin/header.html' with username=user %}
+        {% include 'includes/admin/sidebar.html' with ctx=permission_context %}
+        <main id="main" class="main">
+            <div class="pagetitle">
+                <h1>Ưu đãi</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Trang chủ</a>
+                        </li>
+                        <li class="breadcrumb-item active">Ưu đãi</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End Page Title -->
+            <section class="section dashboard">
+                <div class="modal fade"
+                     id="createOfferModal"
+                     tabindex="-1"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Thêm mới</h5>
+                                <button type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <form method="POST" enctype="multipart/form-data" id="createOfferForm">
+                                {% csrf_token %}
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="offerTitle" class="form-label">Tiêu đề</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="offerTitle"
+                                               name="title"
+                                               required />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="offerDescription" class="form-label">Mô tả</label>
+                                        <textarea class="form-control"
+                                                  id="offerDescription"
+                                                  name="description"
+                                                  rows="3"
+                                                  required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="discountPercentage" class="form-label">Giảm giá</label>
+                                        <input type="number"
+                                               class="form-control"
+                                               id="discountPercentage"
+                                               name="discount_percentage"
+                                               step="0.01"
+                                               required />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="startDate" class="form-label">Ngày bắt đầu</label>
+                                        <input type="date"
+                                               class="form-control"
+                                               id="startDate"
+                                               name="start_date"
+                                               required />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="endDate" class="form-label">Ngày kết thúc</label>
+                                        <input type="date"
+                                               class="form-control"
+                                               id="endDate"
+                                               name="end_date"
+                                               required />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="offerImage" class="form-label">Ảnh</label>
+                                        <input type="file" class="form-control" id="offerImage" name="image">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                    <button type="submit" class="btn btn-primary">Tạo mới</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Basic Modal -->
+                <div class="row">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h5 class="card-title">Danh sách</h5>
+                                <button type="button"
+                                        style="margin-top:10px;
+                                               width:105px;
+                                               height:42px"
+                                        class="btn btn-primary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#createOfferModal">
+                                    Thêm
+                                    mới
+                                </button>
+                            </div>
+                            <!-- Default Table -->
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Tiêu đề</th>
+                                        <th>Mô tả</th>
+                                        <th>Giảm giá %</th>
+                                        <th>Ảnh</th>
+                                        <th>Ngày bắt đầu</th>
+                                        <th>Ngày kết thúc</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for offer in offers %}
+                                        <tr>
+                                            <td>{{ offer.title }}</td>
+                                            <td>{{ offer.description }}</td>
+                                            <td>{{ offer.discount_percentage }}</td>
+                                            <td>
+                                                {% if offer.image %}
+                                                    <img src="{{ offer.image.url }}" alt="Offer Image" width="100">
+                                                {% else %}
+                                                    <img src="{% static 'images/default_offer.jpg' %}"
+                                                         alt="Default Image"
+                                                         width="100">
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ offer.start_date }}</td>
+                                            <td>{{ offer.end_date }}</td>
+                                            <td>
+                                                <button type="button"
+                                                        class="btn btn-warning"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#editOfferModal{{ offer.id }}">Sửa</button>
+                                                <!-- Delete Button -->
+                                                <form method="POST"
+                                                      action="{% url 'delete_gift' offer.id %}"
+                                                      style="display:inline">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-danger">Xóa</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            <!-- End Default Table Example -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        // Hàm để preview ảnh
+        function previewImage(event, offerId) {
+            const file = event.target.files[0];
+            
+            // Kiểm tra xem có file hay không
+            if (!file) return;
+
+            // Tạo đối tượng FileReader mới mỗi lần
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                // Tạo đối tượng Blob từ file
+                const blob = new Blob([file], { type: file.type });
+
+                // Tạo URL từ Blob
+                const blobUrl = URL.createObjectURL(blob);
+
+                // In tên file
+                const viewLink = document.getElementById('viewImageLink_' + offerId);
+                const imageBase64 = document.getElementById('imageBase64_' + offerId);
+                
+                viewLink.textContent = file.name;
+                viewLink.href = blobUrl;
+                viewLink.style.display = 'inline';
+            }
+
+            // Đọc file dưới dạng Data URL
+            reader.readAsArrayBuffer(file);
+        }
+    </script>
+    {% for offer in offers %}
+        <div class="modal fade"
+             id="editOfferModal{{ offer.id }}"
+             tabindex="-1"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Sửa ưu đãi</h5>
+                        <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <form method="POST"
+                          enctype="multipart/form-data"
+                          action="{% url 'edit_gift' offer.id %}">
+                        {% csrf_token %}
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label class="form-label">Tiêu để</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="title"
+                                       value="{{ offer.title }}"
+                                       required />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Mô tả</label>
+                                <textarea class="form-control" name="description" rows="3" required>{{ offer.description }}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Giảm giá</label>
+                                <input type="number"
+                                       class="form-control"
+                                       name="discount_percentage"
+                                       value="{{ offer.discount_percentage }}"
+                                       step="0.01"
+                                       required />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Ngày bắt đầu</label>
+                                <input type="date"
+                                       class="form-control"
+                                       name="start_date"
+                                       value="{{ offer.start_date|date:'Y-m-d' }}"
+                                       required />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Ngày kết thúc</label>
+                                <input type="date"
+                                       class="form-control"
+                                       name="end_date"
+                                       value="{{ offer.end_date|date:'Y-m-d' }}"
+                                       required />
+                            </div>
+                            <!-- Hiển thị hình ảnh hiện tại -->
+                            <div class="mb-3">
+                                <label for="roomImage" class="form-label">Ảnh Ưu Đãi</label>
+                                <br>
+                                {% if offer.image %}
+                                    <a id="oldImageLink_{{ offer.id }}"
+                                       href="{{ offer.image.url }}"
+                                       target="_blank">{{ offer.image.name }}</a>
+                                {% else %}
+                                    Chưa có ảnh
+                                {% endif %}
+                            </div>
+                            Ảnh upload:
+                            <br>
+                            <a><span id="imageBase64_{{ offer.id }}"></span></a>
+                            <a class="ok"
+                               id="viewImageLink_{{ offer.id }}"
+                               style="display:none"
+                               target="_blank">Xem ảnh lớn</a>
+                            <input type="file"
+                                   class="form-control"
+                                   name="image"
+                                   onchange="previewImage(event, {{ offer.id }})" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button type="submit" class="btn btn-primary">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    {% include 'includes/admin/footer.html' %}
+</body>
+</html>

@@ -1,0 +1,15 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DANH SÁCH BÀI VIẾT - CHUYÊN MỤC: {{ dsbaiviet}}</title>
+</head>
+<body>
+<h1> DANH SÁCH BÀI VIẾT - CHUYÊN MỤC: {{ dsbaiviet}}</h1>
+    {% for baiviet in baiviet %}
+    {{ baiviet.TieuDe}} <br>
+    {{ baiviet.ThuTu}} <br>
+    {% endfor%}
+</body>
+</html>

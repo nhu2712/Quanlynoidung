@@ -1,0 +1,34 @@
+{% load i18n static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% trans 'Admin Login' %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/admin_custom.css' %}">
+</head>
+<body class="custom-login">
+
+<div class="login-container">
+    <h1>Django Admin</h1>
+    <p>Welcome! Please log in to continue.</p>
+    
+    <form method="post" action="{% url 'admin:login' %}">
+        {% csrf_token %}
+        {% if form.errors %}
+            <p class="error-message">Please enter a correct username and password.</p>
+        {% endif %}
+        <div class="form-group">
+            <label for="id_username">Username:</label>
+            {{ form.username }}
+        </div>
+        <div class="form-group">
+            <label for="id_password">Password:</label>
+            {{ form.password }}
+        </div>
+        <button type="submit" class="btn-login">Log in</button>
+    </form>
+</div>
+
+</body>
+</html>

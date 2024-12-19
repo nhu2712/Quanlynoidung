@@ -1,0 +1,167 @@
+{% load static %}
+<style>
+  .nav-profile {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+  }
+
+  .nav-profile img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
+
+  .dropdown-menu.profile {
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 10px;
+    min-width: 200px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 1000;
+  }
+
+  .dropdown-menu.profile.show {
+    display: block; /* Show when 'show' class is added */
+  }
+
+  .dropdown-menu.profile .dropdown-header,
+  .dropdown-menu.profile .dropdown-item {
+    font-size: 14px;
+    padding: 10px;
+    color: #333;
+  }
+
+  .dropdown-menu.profile .dropdown-item:hover {
+    background-color: #f0f0f0;
+  }
+
+  .logout-form .logout-button {
+    background: none;
+    border: none;
+    color: #dc3545;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    padding-left: 8px;
+  }
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const profileLink = document.querySelector(".nav-profile");
+    const dropdownMenu = document.querySelector(".dropdown-menu.profile");
+
+    profileLink.addEventListener("click", function (event) {
+      dropdownMenu.classList.toggle("show");
+    });
+
+    // Hide dropdown when clicking outside
+    document.addEventListener("click", function (event) {
+      if (
+        !profileLink.contains(event.target) &&
+        !dropdownMenu.contains(event.target)
+      ) {
+        dropdownMenu.classList.remove("show");
+      }
+    });
+  });
+</script>
+<div class="site-mobile-menu">
+  <div class="site-mobile-menu-header">
+    <div class="site-mobile-menu-close mt-3">
+      <span class="icon-close2 js-menu-toggle"></span>
+    </div>
+  </div>
+  <div class="site-mobile-menu-body"></div>
+</div>
+<div class="site-navbar-wrap js-site-navbar bg-white">
+  <div class="container">
+    <div class="site-navbar bg-light">
+      <div class="py-1">
+        <div class="row align-items-center">
+          <div class="col-2">
+            <h2 class="mb-0 site-logo">
+              <a href="/">Hoang Hon</a>
+            </h2>
+          </div>
+          <div class="col-8">
+            <nav class="site-navigation" role="navigation">
+              <div class="container">
+                <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3">
+                  <a href="#" class="site-menu-toggle js-menu-toggle">
+                    <span class="icon-menu h3"></span>
+                  </a>
+                </div>
+                <ul class="site-menu js-clone-nav d-none d-lg-block">
+                  <li class="active">
+                    <a href="{% url 'home' %}">Trang chủ</a>
+                  </li>
+                  <li class="has-children">
+                    <a href="{% url 'room_list' %}">Phòng</a>
+                    <ul class="dropdown arrow-top">
+                      <li>
+                        <a href="{% url 'rooms_by_type' 'suite' %}">Thượng hạng</a>
+                      </li>
+                      <li>
+                        <a href="{% url 'rooms_by_type' 'standard' %}">Tiêu chuẩn</a>
+                      </li>
+                      <li>
+                        <a href="{% url 'rooms_by_type' 'deluxe' %}">Sang trọng</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="has-children">
+                    <a href="{% url 'event' %}">Sự kiện</a>
+                    <ul class="dropdown arrow-top">
+                      <li>
+                        <a href="{% url 'event' %}">Tin tức</a>
+                      </li>
+                      <li>
+                        <a href="{% url 'gift' %}">Ưu đãi</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="{% url 'service' %}">Dịch vụ</a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+          <div class="col-2">
+            {% if user.is_authenticated %}
+              <div class="nav-profile">
+                <a class="d-flex align-items-center" href="#">
+                  <img src="{% static 'assets/img/profile-img.jpg' %}"
+                       alt="Profile"
+                       class="rounded-circle" />
+                  <span class="d-none d-md-block ps-2">Hồ sơ</span>
+                </a>
+                <ul class="dropdown-menu profile">
+                  <li>
+                    <a class="dropdown-item d-flex align-items-center"
+                       href="{% url 'admin_dashboard' %}">Dashboard</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item d-flex align-items-center"
+                       href="{% url 'logout' %}">Logout</a>
+                  </li>
+                </ul>
+              </div>
+            {% else %}
+              <div>
+                <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

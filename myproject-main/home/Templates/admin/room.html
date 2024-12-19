@@ -1,0 +1,206 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Dashboard - NiceAdmin Bootstrap Template</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/favicon.png' %}" rel="icon" />
+    <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/quill/quill.snow.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/vendor/simple-datatables/style.css' %}" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+
+    <!--     =======================================================
+  * Template Name: NiceAdmin
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Updated: Apr 20 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ========================================================     -->
+  </head>
+
+  <body>
+    {% include 'includes/admin/header.html' %}
+    {% include 'includes/admin/sidebar.html' %}
+
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Dashboard</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="index.html">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Dashboard</li>
+          </ol>
+        </nav>
+      </div>
+      <!-- End Page Title -->
+
+      <section class="section dashboard">
+        <div class="modal fade" id="createRoomModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Tạo Phòng Mới</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form method="POST" enctype="multipart/form-data" id="createRoomForm">
+                {% csrf_token %}
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="roomNumber" class="form-label">Số Phòng</label>
+                    <input type="text" class="form-control" id="roomNumber" name="room_number" required />
+                  </div>
+                  <div class="mb-3">
+                    <label for="roomType" class="form-label">Loại Phòng</label>
+                    <input type="text" class="form-control" id="roomType" name="room_type" required />
+                  </div>
+                  <div class="mb-3">
+                    <label for="pricePerNight" class="form-label">Giá Phòng Mỗi Đêm</label>
+                    <input type="number" class="form-control" id="pricePerNight" name="price_per_night" step="0.01" required />
+                  </div>
+                  <div class="mb-3">
+                    <label for="roomStatus" class="form-label">Trạng Thái</label>
+                    <select class="form-select" id="roomStatus" name="status" required>
+                      <option value="available">Available</option>
+                      <option value="occupied">Occupied</option>
+                      <option value="maintenance">Maintenance</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="roomImage" class="form-label">Ảnh Phòng</label>
+                    <input type="file" class="form-control" id="roomImage" name="image" />
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                  <button type="submit" class="btn btn-primary">Tạo Phòng</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- End Basic Modal -->
+        <div class="row">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                 <h5 class="card-title">Danh sách phòng</h5>
+                 <button type="button" style="margin-top:10px;width:105px;height:42px" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createRoomModal">Thêm mới</button>
+              </div>
+              <!-- Default Table -->
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Số Phòng</th>
+                    <th>Loại Phòng</th>
+                    <th>Giá Phòng Mỗi Đêm</th>
+                    <th>Trạng Thái</th>
+                    <th>Ảnh Phòng</th> 
+                    <th>Hành Động</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for room in rooms %}
+                    <tr>
+                      <td>{{ room.room_number }}</td>
+                      <td>{{ room.room_type }}</td>
+                      <td>{{ room.price_per_night }}</td>
+                      <td>{{ room.get_status_display }}</td>
+                      <td>
+                        {% if room.image %}
+                            <img src="{{ room.image.url }}" alt="Room Image" width="100">
+                        {% else %}
+                            <img src="{% static 'images/img_2.jpg' %}" alt="Room Image" width="100">
+                        {% endif %}
+                    </td>
+                    <td>
+                      <!-- Nút Sửa -->
+                      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editRoomModal{{ room.id }}">Sửa</button>
+  
+                      <!-- Nút Xóa -->
+                      <form method="POST" action="{% url 'delete_room' room.id %}" style="display:inline;">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-danger">Xóa</button>
+                      </form>
+                  </td>
+                    </tr>
+                    <div class="modal fade" id="editRoomModal{{ room.id }}" tabindex="-1" aria-hidden="true">
+                      <div class="modal-dialog">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  <h5 class="modal-title">Chỉnh Sửa Phòng</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <form method="POST" enctype="multipart/form-data" action="{% url 'edit_room' room.id %}">
+                                  {% csrf_token %}
+                                  <div class="modal-body">
+                                      <div class="mb-3">
+                                          <label for="roomNumber" class="form-label">Số Phòng</label>
+                                          <input type="text" class="form-control" name="room_number" value="{{ room.room_number }}" required />
+                                      </div>
+                                      <div class="mb-3">
+                                          <label for="roomType" class="form-label">Loại Phòng</label>
+                                          <input type="text" class="form-control" name="room_type" value="{{ room.room_type }}" required />
+                                      </div>
+                                      <div class="mb-3">
+                                          <label for="pricePerNight" class="form-label">Giá Phòng Mỗi Đêm</label>
+                                          <input type="number" class="form-control" name="price_per_night" value="{{ room.price_per_night }}" step="0.01" required />
+                                      </div>
+                                      <div class="mb-3">
+                                          <label for="roomStatus" class="form-label">Trạng Thái</label>
+                                          <select class="form-select" name="status" required>
+                                              <option value="available" {% if room.status == 'available' %}selected{% endif %}>Available</option>
+                                              <option value="occupied" {% if room.status == 'occupied' %}selected{% endif %}>Occupied</option>
+                                              <option value="maintenance" {% if room.status == 'maintenance' %}selected{% endif %}>Maintenance</option>
+                                          </select>
+                                      </div>
+                                      <div class="mb-3">
+                                          <label for="roomImage" class="form-label">Ảnh Phòng</label>
+                                          <input type="file" class="form-control" name="image" />
+                                      </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                      <button type="submit" class="btn btn-primary">Lưu Thay Đổi</button>
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+                  {% endfor %}
+                </tbody>
+              </table>
+
+              <!-- End Default Table Example -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    {% include 'includes/admin/footer.html' %}
+  </body>
+</html>

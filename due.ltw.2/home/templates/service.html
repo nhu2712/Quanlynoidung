@@ -1,0 +1,199 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Dịch vụ</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700|Work+Sans:300,400,700"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css'  %}" />
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'css/owl.theme.default.min.css' %}"
+    />
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'fonts/flaticon/font/flaticon.css' %}"
+    />
+
+    <style>
+      @import url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/library.less");
+      @import url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/variables.less");
+
+      @body: #252830;
+      @whiteSmoke: #f4f4f4;
+
+      body {
+        background-color: @whiteSmoke;
+        color: white;
+      }
+
+      .container-fluid {
+        display: flex;
+        justify-content: center;
+        width: 75%;
+        margin: 0 auto;
+        padding: 30px;
+
+        @media (max-width: 530px) {
+          left: 0;
+          margin: 10px 0;
+          position: relative;
+          top: 0;
+          transform: none;
+        }
+      }
+
+      .blog-card {
+        background-color: white;
+        border-radius: 1px;
+        box-shadow: 0 0 2px -1px rgba(0, 0, 0, 0.75);
+        height: 350px;
+        margin: 0 auto;
+        max-width: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+
+        .media {
+          background-position: center;
+          background-size: cover;
+          height: 100%;
+          flex: 2;
+          margin-right: 35px; /* Add space between the image and the text */
+        }
+      }
+
+      .media {
+        background-position: center;
+        background-size: cover;
+        height: 100%;
+        flex: 1;
+      }
+
+      .card-body {
+        flex: 1 1 50%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .tagline {
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0;
+      }
+
+      .title {
+        font-size: 28px;
+        margin: 10px 0;
+        font-weight: bold;
+      }
+
+      .divider {
+        border-top: 1px solid #ddd;
+        margin: 10px 0;
+      }
+
+      .paragraph {
+        font-size: 16px;
+        line-height: 1.6;
+        padding: 15px;
+        color: black;
+        overflow-y: auto; /* Add vertical scroll if content overflows */
+      }
+
+      /* Style the scrollbar for Webkit-based browsers */
+      .paragraph::-webkit-scrollbar {
+        width: 10px; /* Width of the scrollbar */
+      }
+
+      .paragraph::-webkit-scrollbar-thumb {
+        background: #888; /* Color of the scroll thumb */
+        border-radius: 5px; /* Rounded edges for the thumb */
+      }
+
+      .paragraph::-webkit-scrollbar-thumb:hover {
+        background: #555; /* Color when hovered */
+      }
+
+      .paragraph::-webkit-scrollbar-track {
+        background: #f1f1f1; /* Background of the scrollbar track */
+        border-radius: 5px; /* Rounded edges for the track */
+      }
+      .read-more {
+        margin-top: 15px;
+        cursor: pointer;
+      }
+
+      .container-service {
+        display:flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css"
+    />
+  </head>
+  <body>
+    <div class="site-wrap">
+      {% include 'includes/header.html' %}
+
+      <div
+        class="site-blocks-cover overlay"
+        style="background-image: url('{% static 'images/hero_1.jpg' %}')"
+        data-aos="fade"
+        data-stellar-background-ratio="0.5"
+      >
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-md-7 text-center" data-aos="fade">
+              <span class="caption mb-3">Tiện lợi - Nhanh chóng</span>
+              <h1 class="mb-4">Dịch vụ</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-service">
+        <h2 class="mb-5"></h2>
+        {% for service in services %}
+        <div class="container-fluid">
+          <div class="blog-card">
+            <div class="media col-sm-6 col-xs-6" style="background-image: url('{{ service.image.url }}');"></div>
+            <div class="card-body col-sm-6 col-xs-6">
+              <h3 class="title text-center">{{ service.name }}</h3>
+              <div class="divider"></div>
+              <p class="paragraph text-justify">{{ service.description }}</p>
+              <a class="read-more glyphicon glyphicon-chevron-down" href="{{ service.link }}"></a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+        <h2 class="mb-5"></h2>
+      </div>
+    
+    </div>
+    {% include 'includes/footer.html' %}
+  </body>
+</html>

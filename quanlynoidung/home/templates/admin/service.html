@@ -1,0 +1,298 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Thông tin dịch vụ</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/favicon.png' %}" rel="icon" />
+    <link href="{% static 'assets/img/apple-touch-icon.png' %}"
+          rel="apple-touch-icon" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet" />
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}"
+          rel="stylesheet" />
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}"
+          rel="stylesheet" />
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}"
+          rel="stylesheet" />
+    <link href="{% static 'assets/vendor/quill/quill.snow.css' %}"
+          rel="stylesheet" />
+    <link href="{% static 'assets/vendor/quill/quill.bubble.css' %}"
+          rel="stylesheet" />
+    <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}"
+          rel="stylesheet" />
+    <link href="{% static 'assets/vendor/simple-datatables/style.css' %}"
+          rel="stylesheet" />
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+    <style>
+      .created-column {
+        width: 150px; /* Hoặc điều chỉnh theo ý bạn */
+      }
+    </style>
+  </head>
+  <body>
+    {% include 'includes/admin/header.html' with username=user %}
+    {% include 'includes/admin/sidebar.html' with ctx=permission_context %}
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Dịch vụ</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="index.html">Trang chủ</a>
+            </li>
+            <li class="breadcrumb-item active">Dịch vụ</li>
+          </ol>
+        </nav>
+      </div>
+      <!-- End Page Title -->
+      <section class="section dashboard">
+        <div class="modal fade"
+             id="createServiceModal"
+             tabindex="-1"
+             aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Tạo Dịch Vụ Mới</h5>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+              </div>
+              <form method="POST" enctype="multipart/form-data" id="createServiceForm">
+                {% csrf_token %}
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="serviceName" class="form-label">Tên Dịch Vụ</label>
+                    <input type="text"
+                           class="form-control"
+                           id="serviceName"
+                           name="name"
+                           required />
+                  </div>
+                  <div class="mb-3">
+                    <label for="serviceCategory" class="form-label">Loại Dịch Vụ</label>
+                    <input type="text"
+                           class="form-control"
+                           id="serviceCategory"
+                           name="category"
+                           required />
+                  </div>
+                  <div class="mb-3">
+                    <label for="servicePrice" class="form-label">Giá Dịch Vụ</label>
+                    <input type="number"
+                           class="form-control"
+                           id="servicePrice"
+                           name="price"
+                           step="0.01"
+                           required />
+                  </div>
+                  <div class="mb-3">
+                    <label for="serviceDescription" class="form-label">Mô Tả Dịch Vụ</label>
+                    <textarea class="form-control"
+                              id="serviceDescription"
+                              name="description"
+                              rows="3"
+                              required></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label for="serviceImage" class="form-label">Ảnh Dịch Vụ</label>
+                    <input type="file" class="form-control" id="serviceImage" name="image" />
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                  <button type="submit" class="btn btn-primary">Tạo Dịch Vụ</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- End Basic Modal -->
+        <div class="row">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <h5 class="card-title">Danh sách dịch vụ</h5>
+                <button type="button"
+                        style="margin-top:10px;
+                               width:105px;
+                               height:42px"
+                        class="btn btn-primary"
+                        data-bs-toggle="modal"
+                        data-bs-target="#createServiceModal">Thêm mới</button>
+              </div>
+              <!-- Default Table -->
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Tên Dịch Vụ</th>
+                    <th>Loại Dịch Vụ</th>
+                    <th>Giá</th>
+                    <th>Mô Tả</th>
+                    <th>Ảnh Dịch Vụ</th>
+                    <th class="created-column">Ngày tạo</th>
+                    <th>Hành Động</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for service in services %}
+                    <tr>
+                      <td>{{ service.name }}</td>
+                      <td>{{ service.category }}</td>
+                      <td>{{ service.price }}</td>
+                      <td>{{ service.description }}</td>
+                      <td>
+                        {% if service.image %}
+                          <img src="{{ service.image.url }}" alt="Service Image" width="100">
+                        {% else %}
+                          <img src="{% static 'images/default_service.jpg' %}"
+                               alt="Service Image"
+                               width="100">
+                        {% endif %}
+                      </td>
+                      <td>{{ service.created_at|date:"d-m-Y H:i" }}</td>
+                      <td>
+                        <!-- Nút Sửa -->
+                        <button type="button"
+                                class="btn btn-warning"
+                                data-bs-toggle="modal"
+                                data-bs-target="#editServiceModal{{ service.id }}">Sửa</button>
+                        <!-- Nút Xóa -->
+                        <form method="POST"
+                              action="{% url 'delete_service' service.id %}"
+                              style="display:inline">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-danger">Xóa</button>
+                        </form>
+                      </td>
+                    </tr>
+                    <div class="modal fade"
+                         id="editServiceModal{{ service.id }}"
+                         tabindex="-1"
+                         aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Chỉnh Sửa Dịch Vụ</h5>
+                            <button type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                          </div>
+                          <form method="POST"
+                                enctype="multipart/form-data"
+                                action="{% url 'edit_service' service.id %}">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                              <div class="mb-3">
+                                <label for="serviceName" class="form-label">Tên Dịch Vụ</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="name"
+                                       value="{{ service.name }}"
+                                       required />
+                              </div>
+                              <div class="mb-3">
+                                <label for="serviceCategory" class="form-label">Loại Dịch Vụ</label>
+                                <input type="text"
+                                       class="form-control"
+                                       name="category"
+                                       value="{{ service.category }}"
+                                       required />
+                              </div>
+                              <div class="mb-3">
+                                <label for="servicePrice" class="form-label">Giá Dịch Vụ</label>
+                                <input type="number"
+                                       class="form-control"
+                                       name="price"
+                                       value="{{ service.price }}"
+                                       step="0.01"
+                                       required />
+                              </div>
+                              <div class="mb-3">
+                                <label for="serviceDescription" class="form-label">Mô Tả Dịch Vụ</label>
+                                <textarea class="form-control" name="description" rows="3" required>{{ service.description }}</textarea>
+                              </div>
+                              <!-- Hiển thị hình ảnh hiện tại -->
+                              <div class="mb-3">
+                                <label for="roomImage" class="form-label">Ảnh Dịch Vụ</label>
+                                <br>
+                                {% if service.image %}
+                                  <a id="oldImageLink_{{ service.id }}"
+                                     href="{{ service.image.url }}"
+                                     target="_blank">{{ service.image.name }}</a>
+                                {% else %}
+                                  Chưa có ảnh
+                                {% endif %}
+                              </div>
+                              Ảnh upload:
+                              <br>
+                              <a><span id="imageBase64_{{ service.id }}"></span></a>
+                              <a id="viewImageLink_{{ service.id }}"
+                                 style="display:none"
+                                 target="_blank">Xem ảnh lớn</a>
+                              <input type="file"
+                                     class="form-control"
+                                     name="image"
+                                     onchange="previewImage(event, {{ service.id }})" />
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                              <button type="submit" class="btn btn-primary">Lưu Thay Đổi</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <!-- End Default Table Example -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script>
+      function previewImage(event, serviceId) {
+          const file = event.target.files[0];
+          
+          // Kiểm tra xem có file hay không
+          if (!file) return;
+
+          // Tạo đối tượng FileReader mới mỗi lần
+          const reader = new FileReader();
+          
+          reader.onload = function(e) {
+              // Tạo đối tượng Blob từ file
+              const blob = new Blob([file], { type: file.type });
+
+              // Tạo URL từ Blob
+              const blobUrl = URL.createObjectURL(blob);
+
+              // In tên file và cập nhật hiển thị
+              const viewLink = document.getElementById('viewImageLink_' + serviceId);
+              const imageBase64 = document.getElementById('imageBase64_' + serviceId);
+              
+              viewLink.textContent = file.name;
+              viewLink.href = blobUrl;
+              viewLink.style.display = 'inline';
+          }
+          
+          // Đọc file dưới dạng Data URL
+          reader.readAsArrayBuffer(file);
+      }
+    </script>
+    {% include 'includes/admin/footer.html' %}
+  </body>
+</html>

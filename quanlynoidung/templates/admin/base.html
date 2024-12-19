@@ -1,0 +1,16 @@
+{# templates/admin/base.html #}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}Admin{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom_admin.css' %}">
+    {% block extrastyle %}{% endblock %}
+</head>
+<body class="custom-admin">
+    {% block content %}{% endblock %}
+    <script src="{% static 'js/custom_admin.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

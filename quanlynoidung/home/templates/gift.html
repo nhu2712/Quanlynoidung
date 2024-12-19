@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Ưu đãi</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700|Work+Sans:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mediaelement@4.2.7/build/mediaelementplayer.min.css">
+    <style>
+      .offer-date-range {
+        font-size: 14px;
+        color: #555; /* Màu xám nhạt */
+        margin-bottom: 8px;
+        display: block;
+      }
+
+      .offer-discount .badge-success {
+        font-size: 12px;
+        padding: 5px 10px;
+        color: #fff;
+        background-color: #28a745;
+        border-radius: 5px;
+        display: inline-block;
+        margin-top: 10px;
+      }
+
+      .offer-discount .badge-success:hover {
+        background-color: #218838;
+      }
+
+    </style>
+  </head>
+  <body>
+
+  <div class="site-wrap">
+    {% include 'includes/header.html' %}
+
+    <!-- Hero Section -->
+    <div class="site-blocks-cover overlay" style="background-image: url('{% static 'images/hero_1.jpg' %}');" data-aos="fade" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-md-7 text-center" data-aos="fade">
+              <span class="caption mb-3">Ưu đãi độc quyền</span>
+              <h1 class="mb-4">Ưu Đãi Mới Nhất</h1>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Offers Section -->
+    <div class="site-section">
+      <div class="container">
+        <div class="row">
+          {% for offer in offers %}
+            <div class="col-md-6 col-lg-4 mb-5">
+              <div class="media-with-text">
+                <div class="img-border-sm mb-4">
+                  {% if offer.image %}
+                  <img src="{{ offer.image.url }}" alt="{{ offer.title }}" class="img-fluid">
+                  {% else %}
+                  <img src="{% static 'images/default_offer.jpg' %}" alt="Default Offer" class="img-fluid">
+                  {% endif %}
+                </div>
+                <h2 class="heading mb-0" style="font-weight: bold; text-align: center;">
+                <a>{{ offer.title }}</a>
+                </h2>
+                {% load l10n %}
+                <div class="offer-date">
+                  <span class="offer-date-range" style="text-align: center">
+                     Hạn dùng từ
+                     {{ offer.start_date|date:"d/m/Y" }} - {{ offer.end_date|date:"d/m/Y" }}
+                  </span>
+                </div>
+                <div class="offer-discount" style="text-align: center;">
+                  <span class="badge badge-success" >{{ offer.discount_percentage }}% Off</span>
+                </div>
+
+                <p style="text-align: center; white-space: pre-line; font-style: italic;">{{ offer.description }}</p>
+
+              </div>
+            </div>
+          {% empty %}
+          <div class="col-12">
+            <p class="text-center">Hiện tại không có ưu đãi nào. Hãy quay lại sau!.</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include 'includes/footer.html' %}
+
+  </body>
+</html>

@@ -1,0 +1,16 @@
+<!-- home/templates/room_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Detail</title>
+</head>
+<body>
+    <h1>Room: {{ room.name }}</h1>
+    <p>Description: {{ room.description }}</p>
+    <p>Price: {{ room.price }}</p>
+    <p>Capacity: {{ room.capacity }}</p>
+    <a href="{% url 'room' %}">Back to Rooms</a>
+</body>
+</html>

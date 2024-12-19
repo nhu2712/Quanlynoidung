@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Hồ sơ cá nhân</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+    <link href="{% static 'assets/img/apple-touch-icon.png' %}"
+          rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'assets/vendor/quill/quill.snow.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'assets/vendor/quill/quill.bubble.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'assets/vendor/simple-datatables/style.css' %}"
+          rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+    <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Updated: Apr 20 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+    <style>
+    .card-body p {
+      line-height: 1.8; /* Tăng khoảng cách giữa các dòng */
+      margin-bottom: 0.5rem; /* Thêm khoảng cách dưới mỗi dòng */
+    }
+    </style>
+  </head>
+  <body>
+    {% include 'includes/admin/header.html' with username=user %}
+    {% include 'includes/admin/sidebar.html' with ctx=permission_context %}
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Thông tin cá nhân</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="http://127.0.0.1:8000/admin_dashboard/">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Thông tin cá nhân</li>
+          </ol>
+        </nav>
+      </div>
+      <!-- End Page Title -->
+      {% block content %}
+        <div class="container mt-3">
+          <div class="card border border-primary">
+            <div class="card-header bg-primary text-white">Thông tin tài khoản</div>
+            <div class="card-body">
+              <p>
+                <strong>Tên tài khoản:</strong> {{ request.user.username }}
+                <br>
+                <strong>Ngày tham gia:</strong> {{ request.user.date_joined }}
+                <br>
+                <strong>Email:</strong> {{ request.user.email }}
+                <br>
+                <strong>Lần cuối đăng nhập:</strong> {{ request.user.last_login }}
+                <br>
+              </p>
+            </div>
+          </div>
+        </div>
+      {% endblock %}
+      {% include 'includes/admin/footer.html' %}
+    </body>
+  </html>
